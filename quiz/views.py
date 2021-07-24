@@ -4,4 +4,7 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the quiz index.")
+    return render(request,'base.html',{"content": "Hello World!"})
+
+def play(request):
+    return render(request,'base.html',{"content":"Question"})
