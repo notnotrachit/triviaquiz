@@ -3,7 +3,5 @@ db.sqlite3
 .vscode
 venv
 quiz/__pycache__
-quiz/migrations
-quiz/__pycache__/views.cpython-39.pyc
-*.pyc
+triviaquiz/__pycache__
 *.pyc
