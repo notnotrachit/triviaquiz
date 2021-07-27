@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">Correct</h4>
+    <p class="card-text">{{ ans }} was the right answer!</p>
+  </div>
+</div>
+<a href="{% url 'play' %}">
+<button type="button" class="btn btn-outline-success">New Question</button>
+{% endblock %}
