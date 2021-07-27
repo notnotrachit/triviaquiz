@@ -3,4 +3,5 @@ db.sqlite3
 .vscode
 venv
 quiz/__pycache__
-quiz/migrations
+triviaquiz/__pycache__
+quiz/migrations/__pycache__
