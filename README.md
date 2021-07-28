@@ -20,6 +20,8 @@ A simple trivia quizzz web app made using django
 - Better appearance
 - 404/500 Error page
 - Meta data in html pages
+- Leaderboard
+- Public profiles
 
 
     
