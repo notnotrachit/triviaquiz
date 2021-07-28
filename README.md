@@ -1,5 +1,5 @@
 
-# Trivia Quizz
+# Trivia Quizzz
 
 A simple trivia quizzz web app made using django
 
