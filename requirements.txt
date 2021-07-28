@@ -1,0 +1,5 @@
+Django
+django-allauth
+django-anymail
+django-import-export
+python-dotenv
