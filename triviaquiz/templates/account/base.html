@@ -1,50 +1,26 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>{% block head_title %}{% endblock %}</title>
-    {% block extra_head %}
-    {% endblock %}
-  </head>
-  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/darkly/bootstrap.min.css">
-  <body>
-    {% block body %}
+{% extends "base.html" %}
 
-    {% if messages %}
-    <div>
-      <strong>Messages:</strong>
-      <ul>
-        {% for message in messages %}
-        <li>{{message}}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
+{% load i18n %}
+{% block head %}
+<style type="text/css">
+  ul {
+  list-style-type: none;
+}
+.errorlist{
+  font-size: small;
+  margin: 0;
+  color: red;
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a class="navbar-brand" href="{% url 'index' %}">Trivia Quiz</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor02">
-        <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li></ul>
-      <ul class="d-flex navbar-nav">
-        {% if user.is_authenticated %}
-        <li class="nav-link"><a href="{% url 'account_email' %}">Change E-mail</a></li>
-        <li class="nav-link"><a href="{% url 'account_logout' %}">Sign Out</a></li>
-        {% else %}
-        <li class="nav-link"><a href="{% url 'account_login' %}">Sign In</a></li>
-        <li class="nav-link"><a href="{% url 'account_signup' %}">Sign Up</a></li>
-        {% endif %}
-      </ul>
-    </div>
-    </nav>
-    {% block content %}
-    {% endblock %}
-    {% endblock %}
-    {% block extra_body %}
-    {% endblock %}
-  </body>
-</html>
+}
+</style>
+{% endblock %}
+{% block content %}
+
+<h1>{% trans 'My Account' %}</h1>
+
+
+{% block account_content %}
+{% endblock %}
+
+{% endblock %}
+

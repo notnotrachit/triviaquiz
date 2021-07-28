@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from import_export.admin import ImportExportModelAdmin
 
 from import_export import resources
-
+from django.dispatch import receiver
+from allauth.account.signals import user_signed_up
 
 
 class questions(models.Model):
@@ -39,7 +40,7 @@ class scores(models.Model):
     correct=models.IntegerField(default=0)
     incorrect=models.IntegerField(default=0)
     unanswered=models.IntegerField(default=0)
-    q_attempted=models.CharField(max_length=99999)
+    q_attempted=models.CharField(default="[]",max_length=99999)
 
     def __str__(self):
         return ': '.join([self.user.username, str(self.correct)])
@@ -48,9 +49,16 @@ class scores(models.Model):
         verbose_name_plural = "Stats"
 
 class scoresAdmin(admin.ModelAdmin):
-    readonly_fields = ('user',)
+    #readonly_fields = ('user',)
     list_filter = ('user',)
     list_display = ['user', 'correct', 'incorrect','unanswered']
+
+
+@receiver(user_signed_up)
+def create_user_profile(sender, user, **kwargs):
+    scores.objects.create(user=user)
+
+
 
 admin.site.register(questions,questionsAdmin)
 admin.site.register(scores,scoresAdmin)

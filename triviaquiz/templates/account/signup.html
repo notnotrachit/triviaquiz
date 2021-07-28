@@ -1,21 +1,30 @@
 {% extends "account/base.html" %}
-
+{% load socialaccount %}
+{% get_social_accounts user as accounts %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% block head_title %}{% trans "Sign Up" %}{% endblock %}
 
 {% block content %}
+
 <h1>{% trans "Sign Up" %}</h1>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">log in</a>.{% endblocktrans %}</p>
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+{% block help_text %}
+{% endblock help_text %}
+
+<form id="signup_form" class="form-horizontal" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+{{ form.as_p }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button type="submit" class="btn btn-outline-success">{% trans "Sign Up" %} </button>
+  <div class="form-actions">
+  <button class="btn btn-primary" type="submit">{% trans "Sign Up" %}</button>
+  </div>
 </form>
-
+<h3>Or</h3>
+<h5>You can use your social account to register/login</h5>
+<a href="{% provider_login_url "google" process="login" %}"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" height="30px"></a>
 {% endblock %}

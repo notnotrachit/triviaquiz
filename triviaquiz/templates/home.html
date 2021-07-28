@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block head %}
+<style type="text/css">
+	*{
+	  margin: 0;
+	  padding: 0;
+	  box-sizing: border-box;
+	}
+	.stage{
+	  height: 350px;
+	  width: 250px;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+	.p{
+	  font-size: 35px;
+	  text-align: center;
+	  margin-top: 0;
+	  cursor: pointer;
+	  width: 100%;
+	  background: #78FED6;
+	  border-radius: 10px;
+	  font-family: Century Gothic;
+	  letter-spacing: 5px;
+	}
+	.div{
+	  margin-left: auto;
+	  margin-right: auto;
+	  border-radius: 10px;
+	  width: 200px;
+	  height: 40px;
+	  margin-top: 4%;
+	 transition-duration: 0.2s;
+
+	}
+	.p:hover{
+	  background: #ADD8E6;
+	  color: black;
+	}
+	.div:nth-child(odd){
+	  transform: perspective(300px) rotateY(45deg);
+	  box-shadow: -2px 2px 7px gray;
+	}
+	.div:nth-child(even){
+	  transform: perspective(300px) rotateY(-45deg);
+	    box-shadow: 2px 2px 7px gray;
+	}
+	.div:nth-child(3){
+		width: 250px;
+	}
+
+	.div:hover{
+	  transform: rotateY(0);
+	  background: black;
+	  color: white;
+	  box-shadow: 0px 0px 0px;
+	}
+	a {
+  text-decoration: none;
+	}
+
+	h1 {
+  font-size: 96px;
+  background: -webkit-linear-gradient(#add8e6, #800080);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+	}
+</style>
+{% endblock %}
+{% block content %}
+<h1>Trivia Quiz</h1>
+<section class="stage">
+  <div id="home" class="div"><a href="{% url 'index' %}"> <p id="homep" class="p">Home</p></a></div>
+  <div class="div" id="about"><a href="{% url 'play' %}"><p class="p">Play</p></a>
+  </div>
+  <div class="div" id="contact"><a href="{% url 'category' %}"><p class="p">Categories</p></a>
+  </div>
+  <div class="div" id="gallery"><p class="p">About</p>
+  </div>
+</section>
+{% endblock %}

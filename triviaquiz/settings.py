@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,7 +50,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.discord',
     'allauth.socialaccount.providers.google',
-    'quiz'
+    'quiz',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -90,19 +94,19 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-"""
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
 
-        'APP': {
-            'client_id': '123',
-            'secret': '456',
-            'key': ''
-        }
-    }
-}"""
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+ACCOUNT_EMAIL_REQUIRED = True
+EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"
+
+
+ANYMAIL = {
+    
+    "SENDINBLUE_API_KEY": os.getenv("SENDINBLUE_API_KEY"),
+    
+}
+DEFAULT_FROM_EMAIL='Webmaster <webmaster@triviaquiz.com>'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

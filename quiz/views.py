@@ -1,11 +1,20 @@
 from django.shortcuts import render,redirect
 from quiz.models import questions,scores
+from django.contrib.auth.models import User
+from allauth.socialaccount.models import SocialAccount
+from django.views.generic.edit import FormView
+
 from django.http import HttpResponse
 import json
 from django.contrib.auth.decorators import login_required
+import hashlib
+
+
+
+
 
 def index(request):
-    return render(request,'base.html',{"content": "Hello World!"})
+    return render(request,'home.html')
 
 
 @login_required(login_url='/accounts/login/')
@@ -39,17 +48,17 @@ def check(request):
                 stats=scores.objects.get(user=request.user)
                 stats.correct += 1
                 stats.save()
-                return render(request,'result.html',{"ans":questions.objects.get(number=request.POST.get('id')).answer})
-            elif request.POST.get('name')=="skipped":
+                return render(request,'result.html',{ "correct":'True',"ans":questions.objects.get(number=request.POST.get('id')).answer})
+            elif request.POST.get('name')=="Skip":
                 stats=scores.objects.get(user=request.user)
                 stats.unanswered += 1
                 stats.save()
-                return HttpResponse("Skipped")
+                return render(request,'result.html',{"skip":"True","ans":questions.objects.get(number=request.POST.get('id')).answer})
             else:
                 stats=scores.objects.get(user=request.user)
                 stats.incorrect += 1
                 stats.save()
-                return HttpResponse("Wrong")
+                return render(request,'result.html',{"incorrect":"True","ans":questions.objects.get(number=request.POST.get('id')).answer})
 
         else:
             return redirect(play)
@@ -59,4 +68,32 @@ def check(request):
     
 @login_required(login_url='/accounts/login/')
 def profile(request):
-    return render(request,'account/profile.html')
+    k=SocialAccount.objects.filter(user=request.user)
+    disc=False
+    ggl=False
+    for i in k:
+        if i.provider == "discord":
+            disc=True
+        elif i.provider == "google":
+            ggl=True
+
+    h=hashlib.md5(request.user.email.encode('utf-8')).hexdigest()
+    if len(k)>0:
+        g_url=k[0].get_avatar_url()
+    else:
+        g_url=f"http://www.gravatar.com/avatar/{h}?d=https://i.imgur.com/ynad6vI.png"
+    
+    stats=scores.objects.get(user=request.user)
+    return render(request,'account/profile.html',{"url":g_url,"USERNAME":request.user.username,"cor_ans":stats.correct,"incor_ans":stats.incorrect,"unans":stats.unanswered,"sa":k,"disc":disc,"ggl":ggl})
+
+
+@login_required(login_url='/accounts/login/')
+def accounts(request):
+    return render(request,'account/base.html')
+
+@login_required(login_url='/accounts/login/')
+def conredirect(request):
+    return redirect(profile)
+
+def category(request):
+    return render(request,'comingsoon.html')

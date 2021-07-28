@@ -5,3 +5,4 @@ venv
 quiz/__pycache__
 triviaquiz/__pycache__
 *.pyc
+.env

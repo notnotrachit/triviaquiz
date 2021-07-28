@@ -1,75 +1,74 @@
 {% extends "base.html" %}
+{% load socialaccount %}
 
+{% get_social_accounts user as accounts %}
 {% block head %}
 <style type="text/css">
-html
-{
-  overflow: hidden;
-}
-body{
-    background-image: url("https://images.unsplash.com/photo-1627241237373-6a9bae67d311?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1") ;
-      background-repeat: no-repeat;
-  background-attachment: fixed;
 
-}
-.profile{
-    /*
-    display: flex;
-    justify-content: center;
-    align-items: center;*/
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-	.blur {
-  display: flex;
-  justify-content: center;
-  /*align-items: center;*/
-  position: relative;
-  margin: 5%;
-  width: 70%;
-  height: 70%;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.2);
+    body{
+        background-image: url("https://images.unsplash.com/photo-1627241237373-6a9bae67d311?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1") ;
+          background-repeat: no-repeat;
+      background-attachment: fixed;
 
-}
-.avatar{
-    position: absolute;
-    top: -50px;
-    /*left: 50% - 50%;*/
-    margin: 0;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-  height: 100px;
-  background: rgba(0,0,0,1);
-  backdrop-filter: blur(5px);
-  border-radius: 50px;
-  border: 1px solid rgba(255,255,255,1);
+    }
+    .profile{
+        /*
+        display: flex;
+        justify-content: center;
+        align-items: center;*/
+        position: absolute;
+        width: 99%;
+        height: 100%;
+    }
+    	.blur {
+      display: flex;
+      justify-content: center;
+      /*align-items: center;*/
+      position: relative;
+      margin: 5%;
+      width: 70%;
+      height: 70%;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(5px);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+
+    }
+    .avatar{
+            animation-name: floating;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        position: absolute;
+        top: -50px;
+        /*left: 50% - 50%;*/
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+      height: 100px;
+      background: rgba(0,0,0,1);
+      backdrop-filter: blur(5px);
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,1);
 
 
-}
-.avatar_img{
-    height: 100%;
-    width: 100%;
-    border-radius: 100%;
+    }
+    .avatar_img{
+        height: 100%;
+        width: 100%;
+        border-radius: 100%;
 
-}
-table {
-    
-    width: 100%;
-}
-table, th, td{
-    background: rgba(0, 0, 0, 0);
-    border: 1px solid white;
-    margin: 5px;
-}
-td{
-    text-align: center;
-}
+    }
 
+    td{
+        text-align: center;
+    }
+    @keyframes floating {
+        0% { transform: translate(0,  0px); }
+        50%  { transform: translate(0, 15px); }
+        100%   { transform: translate(0, -0px); }   
+    }
 </style>
 
 {% endblock %}
@@ -78,26 +77,58 @@ td{
 
 <div class="profile">
 <div class="blur">
-<div class="avatar"><img class="avatar_img" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"></div><span style="margin-top: 75px"><h1>USERNAME</h1>
-<h3>Stats:</h3>
-<table > 
-    <tr>
-      <th>Correct Answers</th>
-      <th>Incorrect Answers</th>
-      <th>Unanswered</th>
-    </tr>
-    <tr >
-      <td>3</th>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-</table>
-<h3>Socail Accounts:</h3>
-<h5>Connect:</h5>
-<h5>Connected:</h5>
+    <div class="avatar">
+        <img class="avatar_img" src="{{ url }}">
+    </div>
+    <span style="margin-top: 75px"><h1>{{ USERNAME }}</h1>
+    <h3>Stats:</h3>
+    <table class="table w-auto"> 
+        <tr>
+          <th>Correct Answers</th>
+          <th>Incorrect Answers</th>
+          <th>Unanswered</th>
+        </tr>
+        <tr >
+          <td>{{cor_ans}}</th>
+          <td>{{incor_ans}}</td>
+          <td>{{unans}}</td>
+        </tr>
+    </table>
+    <h3>Social Accounts:</h3>
 
-</span>
+        <h5>Connected:</h5>
+            {% for i in sa %}
+            
+            {% if i.provider == 'discord' %} <img src="https://discord.com/assets/3437c10597c1526c3dbd98c737c2bcae.svg" height="30px"> {{i.extra_data.username}}{% elif i.provider == 'google' %} <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" height="30px">{{i.extra_data.name}} {% endif %}{% endfor %}
+        
+    </a>
+        {% if ggl and disc %}
+        {% elif disc and not ggl %}
+        <h5>Available to connect:</h5>
+        <a href="{% provider_login_url "google" process="connect" %}">
+            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Connect" ><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" height="30px">
+            </button>
+        </a> 
+        {% elif ggl and not disc %}
+        <h5>Available to connect:</h5>
+        <a href="{% provider_login_url "discord" process="connect" %}">
+            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Connect" ><img src="https://discord.com/assets/3437c10597c1526c3dbd98c737c2bcae.svg" height="30px">
+            </button>
+        </a> 
+        {% elif not ggl and not disc %}
+        <h5>Available to connect:</h5>
+        <a href="{% provider_login_url "google" process="connect" %}">
+            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Connect" ><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" height="30px">
+            </button>
+        </a> 
+        <a href="{% provider_login_url "discord" process="connect" %}">
+            <button type="button" class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Connect" ><img src="https://discord.com/assets/3437c10597c1526c3dbd98c737c2bcae.svg" height="30px">
+            </button>
+        </a>
+        {% endif %}
+    </span>
 
-</div></div>
+    </div>
+</div>
 
 {% endblock %}
