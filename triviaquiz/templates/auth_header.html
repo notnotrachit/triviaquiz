@@ -27,19 +27,21 @@
         
       </ul>
       <ul class="navbar-nav ml-auto">
-        <div class="ml-auto d-flex nav-account-section">
-          <h4>
+        
+         
           <li class="nav-item dropdown">
+            <h4>
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi, {{user.username}}</a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+              <a class="dropdown-item" href="{% url 'account_change_password' %}">Change Password</a>
               <div class="dropdown-divider">      
                 </div>
               <a class="dropdown-item text-danger" href="{% url 'account_logout' %}">Logout</a>
             </div>
           </li></h4>
           <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}"><button type="button" class="btn btn-outline-danger"><h5>Logout</h5></button></a></li>
-        </div>
+        
       </ul>
 
     </div>

@@ -81,7 +81,7 @@ def profile(request):
     if len(k)>0:
         g_url=k[0].get_avatar_url()
     else:
-        g_url=f"http://www.gravatar.com/avatar/{h}?d=https://i.imgur.com/ynad6vI.png"
+        g_url=f"http://www.gravatar.com/avatar/{h}?d=https://i.imgur.com/Srg5ywH.jpg"
     
     stats=scores.objects.get(user=request.user)
     return render(request,'account/profile.html',{"url":g_url,"USERNAME":request.user.username,"cor_ans":stats.correct,"incor_ans":stats.incorrect,"unans":stats.unanswered,"sa":k,"disc":disc,"ggl":ggl})
@@ -97,3 +97,6 @@ def conredirect(request):
 
 def category(request):
     return render(request,'comingsoon.html')
+
+def about(request):
+    return render(request,'about.html')

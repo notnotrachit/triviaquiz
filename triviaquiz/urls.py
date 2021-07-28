@@ -26,5 +26,6 @@ urlpatterns = [
     path('accounts/profile', quiz_views.profile, name='profile'),
     path('accounts/profile/', quiz_views.profile, name='profile'),
     path('accounts', quiz_views.accounts, name='account'),
+    path('about',quiz_views.about,name='about'),
     
 ]
