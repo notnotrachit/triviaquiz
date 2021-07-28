@@ -11,13 +11,13 @@ from allauth.account.signals import user_signed_up
 
 class questions(models.Model):
     number=models.IntegerField()
-    question= models.CharField(max_length=50)
-    category=models.CharField(max_length=50)
-    option1=models.CharField(max_length=50)
-    option2=models.CharField(max_length=50)
-    option3=models.CharField(max_length=50)
-    option4=models.CharField(max_length=50)
-    answer=models.CharField(max_length=50)
+    question= models.CharField(max_length=9999)
+    category=models.CharField(max_length=999)
+    option1=models.CharField(max_length=999)
+    option2=models.CharField(max_length=999)
+    option3=models.CharField(max_length=999)
+    option4=models.CharField(max_length=999)
+    answer=models.CharField(max_length=999)
 
     def __str__(self):
         return ': '.join([str(self.number), str(self.question)])
