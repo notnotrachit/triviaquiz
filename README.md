@@ -23,6 +23,7 @@ A simple trivia quizzz web app made using django
 - Meta data in html pages
 - Leaderboard
 - Public profiles
+- Time limit of 15 sec in each question
 
 
     
