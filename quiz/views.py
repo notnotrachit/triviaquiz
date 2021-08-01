@@ -22,7 +22,7 @@ def play(request):
     stats=scores.objects.get(user=request.user)
     qa_list=json.loads(stats.q_attempted)
 
-    category=(request.GET.get('category',''))
+    category=(request.GET.get('category',""))
 
     if category == "":
         if len(questions.objects.exclude(number__in=qa_list).order_by('?'))>0:
@@ -33,7 +33,7 @@ def play(request):
     elif category != "":
         if len(questions.objects.filter(category=category).exclude(number__in=qa_list).order_by('?'))>0:
             x = questions.objects.filter(category=category).exclude(number__in=qa_list).order_by('?')[0]     
-            return render(request,'question.html',{"question":x.question ,"category":x.category, "option1":x.option1,"option2":x.option2,"option3":x.option3,"option4":x.option4,'id':x.number})
+            return render(request,'question.html',{"question":x.question ,"category":x.category, "option1":x.option1,"option2":x.option2,"option3":x.option3,"option4":x.option4,'id':x.number ,'cate':category})
         else:
             return render(request,'question.html',{"question":"You have played all questions from this category"})
 
@@ -49,24 +49,25 @@ def check(request):
             qa_list=json.loads(stats.q_attempted)
 
             qa_list.append(int(request.POST.get('id')))
-
+            category=request.POST.get('cate')
+            print(category)
             stats.q_attempted=json.dumps(qa_list)
             stats.save()
             if request.POST.get('name') == questions.objects.get(number=request.POST.get('id')).answer:
                 stats=scores.objects.get(user=request.user)
                 stats.correct += 1
                 stats.save()
-                return render(request,'result.html',{ "correct":'True',"ans":questions.objects.get(number=request.POST.get('id')).answer})
+                return render(request,'result.html',{ "correct":'True',"ans":questions.objects.get(number=request.POST.get('id')).answer,"cate":category})
             elif request.POST.get('name')=="Skip":
                 stats=scores.objects.get(user=request.user)
                 stats.unanswered += 1
                 stats.save()
-                return render(request,'result.html',{"skip":"True","ans":questions.objects.get(number=request.POST.get('id')).answer})
+                return render(request,'result.html',{"skip":"True","ans":questions.objects.get(number=request.POST.get('id')).answer,"cate":category})
             else:
                 stats=scores.objects.get(user=request.user)
                 stats.incorrect += 1
                 stats.save()
-                return render(request,'result.html',{"incorrect":"True","ans":questions.objects.get(number=request.POST.get('id')).answer})
+                return render(request,'result.html',{"incorrect":"True","ans":questions.objects.get(number=request.POST.get('id')).answer,"cate":category})
 
         else:
             return redirect(play)

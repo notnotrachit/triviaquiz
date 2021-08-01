@@ -6,6 +6,10 @@
     <p class="card-text">{{ ans }} was the right answer!</p>
   </div>
 </div>
-<a href="{% url 'play' %}">
+{% if cate %}
+<a href="/play/?category={{cate}}">
 <button type="button" class="btn btn-outline-success">New Question</button>
+ {% else %}
+<a href="{% url 'play' %}">
+<button type="button" class="btn btn-outline-success">New Question</button>{% endif %}
 {% endblock %}
