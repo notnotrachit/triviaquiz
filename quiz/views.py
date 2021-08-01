@@ -21,13 +21,21 @@ def index(request):
 def play(request):
     stats=scores.objects.get(user=request.user)
     qa_list=json.loads(stats.q_attempted)
-    if len(questions.objects.exclude(number__in=qa_list).order_by('?'))>0:
-        x = questions.objects.exclude(number__in=qa_list).order_by('?')[0]
-        #context={"content"=x.question}
-        
-        return render(request,'question.html',{"question":x.question ,"category":x.category, "option1":x.option1,"option2":x.option2,"option3":x.option3,"option4":x.option4,'id':x.number})
-    else:
-        return render(request,'question.html',{"question":"You have played all questions"})
+
+    category=(request.GET.get('category',''))
+
+    if category == "":
+        if len(questions.objects.exclude(number__in=qa_list).order_by('?'))>0:
+            x = questions.objects.exclude(number__in=qa_list).order_by('?')[0]     
+            return render(request,'question.html',{"question":x.question ,"category":x.category, "option1":x.option1,"option2":x.option2,"option3":x.option3,"option4":x.option4,'id':x.number})
+        else:
+            return render(request,'question.html',{"question":"You have played all questions"})
+    elif category != "":
+        if len(questions.objects.filter(category=category).exclude(number__in=qa_list).order_by('?'))>0:
+            x = questions.objects.filter(category=category).exclude(number__in=qa_list).order_by('?')[0]     
+            return render(request,'question.html',{"question":x.question ,"category":x.category, "option1":x.option1,"option2":x.option2,"option3":x.option3,"option4":x.option4,'id':x.number})
+        else:
+            return render(request,'question.html',{"question":"You have played all questions from this category"})
 
 @login_required(login_url='/accounts/login/')
 def check(request):
@@ -96,7 +104,11 @@ def conredirect(request):
     return redirect(profile)
 
 def category(request):
-    return render(request,'comingsoon.html')
+    all_cats=questions.objects.all().values("category").distinct()
+    return render(request,'category.html',{'cats':all_cats})
+
+def cat_redirect(request):
+    return redirect(f"/play/?category={request.POST.get('category_select')}")
 
 def about(request):
     return render(request,'about.html')

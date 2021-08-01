@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Categories{% endblock %}
+{% block content %}
+<h1></h1>
+<form action="cat_redirect" method="POST">
+	{% csrf_token %}
+    <div class="form-group">
+      <h1>Select Category</h1><br>
+      <select class="form-select" id="category_select" name="category_select">
+      	{% for i in cats %}
+      	<option>{{ i.category }}</option>
+      	{% endfor %}
+      </select>
+    </div>	<br>
+    <input type="submit" name="submit" class="btn btn-outline-light">
+</form>
+
+
+
+{% endblock %}
