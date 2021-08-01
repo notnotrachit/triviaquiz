@@ -15,6 +15,7 @@ A simple trivia quizzz web app made using django
 - Import, export options for questions in multiple formats
 - User Avatar in profile page { Social avatar from discord,google if connected else [gravatar](https://en.gravatar.com/) }
 - More than 3k Questions (only on http://triviaquizzz.herokuapp.com not in repository) (Questions from OpentriviaDB)
+- Play by categories
 
 ### Planned Features
 
