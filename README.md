@@ -19,7 +19,7 @@ A simple trivia quizzz web app made using django
 
 ### Planned Features
 
-- Better appearance
+- Better appearance on mobile
 - More responsive webpages
 - 404/500 Error page
 - Meta data in html pages
