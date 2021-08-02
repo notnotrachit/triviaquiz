@@ -8,8 +8,8 @@
 </div>
 {% if cate %}
 <a href="/play/?category={{cate}}">
-<button type="button" class="btn btn-outline-success">New Question</button>
+<button type="button" class="btn btn-outline-success">Next Question</button>
  {% else %}
 <a href="{% url 'play' %}">
-<button type="button" class="btn btn-outline-success">New Question</button>{% endif %}
+<button type="button" class="btn btn-outline-success">Next Question</button>{% endif %}
 {% endblock %}
