@@ -27,6 +27,7 @@ A simple trivia quizzz web app made using django
 - Public profiles
 - Time limit of 15 sec in each question
 - Submit questions (users can submit questions)
+- PWA (Progressive web app) App 
 
 
     
