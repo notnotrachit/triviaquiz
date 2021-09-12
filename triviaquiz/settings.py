@@ -89,24 +89,12 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-
     'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': ‘k’,
-
-        'USER': 'postgres',
-
-        'PASSWORD': f'{os.getenv("dbpass")}',
-
-        'HOST': 'z5149d44c-postgresql.qovery.io',
-
-        'PORT': '5432',
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 ACCOUNT_EMAIL_REQUIRED = True
