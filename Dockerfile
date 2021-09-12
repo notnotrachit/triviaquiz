@@ -1,4 +1,4 @@
-FROM <image_name>:<image_version>
+FROM python:3
 WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt
