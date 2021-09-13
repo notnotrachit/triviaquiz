@@ -40,7 +40,7 @@ class scores(models.Model):
     correct=models.IntegerField(default=0)
     incorrect=models.IntegerField(default=0)
     unanswered=models.IntegerField(default=0)
-    q_attempted=models.CharField(default="[]",max_length=65535)
+    q_attempted=models.CharField(default="[]",max_length=65534)
 
     def __str__(self):
         return ': '.join([self.user.username, str(self.correct)])
