@@ -90,15 +90,12 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': os.environ.get('QOVERY_DATABASE_MY_DB_DATABASE', 'postgres'),
-    'USER': os.environ.get('QOVERY_DATABASE_MY_DB_USERNAME', 'postgres'),
-    'PASSWORD': os.environ.get('QOVERY_DATABASE_MY_DB_PASSWORD', 'postgres'),
-    'HOST': os.environ.get('QOVERY_DATABASE_MY_DB_HOST', 'localhost'),
-    'PORT': os.environ.get('QOVERY_DATABASE_MY_DB_PORT', 5432),
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 ACCOUNT_EMAIL_REQUIRED = True
