@@ -94,7 +94,7 @@ DATABASES = {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     'NAME': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_DEFAULT_DATABASE_NAME', 'postgres'),
     'USER': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_LOGIN', 'postgres'),
-    'PASSWORD': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_PASSWORD', 'postgres'),
+    'PASSWORD': os.environ.get('PASS'),
     'HOST': os.environ.get('QOVERY_APPLICATION_Z617BBF10_HOST_EXTERNAL','zc5ea19fa-postgresql.qovery.io'),
     'PORT': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_PORT', 5432),
   }
