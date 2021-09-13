@@ -91,8 +91,9 @@ SITE_ID = 1
 
 DATABASES = {
     'default': {
+        
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': os.environ.get('QOVERY_MYSQL_Z6F97CBC7_DEFAULT_DATABASE_NAME', 'mysql'),
-        'ENGINE': 'mysql.connector.django',
         'USER': os.environ.get('QOVERY_MYSQL_Z6F97CBC7_LOGIN', 'root'),
         'PASSWORD': os.environ.get('PASS'),
         'HOST': os.environ.get('QOVERY_MYSQL_Z6F97CBC7_HOST','z6f97cbc7-mysql.qovery.io'),
