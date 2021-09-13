@@ -90,6 +90,21 @@ SITE_ID = 1
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    'default': {
+        'NAME': os.environ.get('QOVERY_MYSQL_Z6F97CBC7_DEFAULT_DATABASE_NAME', 'mysql'),
+        'ENGINE': 'mysql.connector.django',
+        'USER': os.environ.get('QOVERY_MYSQL_Z6F97CBC7_LOGIN', 'root'),
+        'PASSWORD': os.environ.get('PASS'),
+        'HOST': os.environ.get('QOVERY_MYSQL_Z6F97CBC7_HOST','z6f97cbc7-mysql.qovery.io'),
+        'PORT': os.environ.get('QOVERY_MYSQL_Z6F97CBC7_PORT', 3306),
+        'OPTIONS': {
+          'autocommit': True,
+        },
+    }
+}
+
+"""
+DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     'NAME': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_DEFAULT_DATABASE_NAME', 'postgres'),
@@ -98,7 +113,7 @@ DATABASES = {
     'HOST': os.environ.get('QOVERY_APPLICATION_Z8361EF39_HOST_INTERNAL','zc5ea19fa-postgresql.qovery.io'),
     'PORT': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_PORT', 5432),
   }
-}
+}"""
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 ACCOUNT_EMAIL_REQUIRED = True

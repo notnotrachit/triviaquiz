@@ -6,3 +6,4 @@ python-dotenv
 gunicorn
 whitenoise
 psycopg2
+mysqlclient
