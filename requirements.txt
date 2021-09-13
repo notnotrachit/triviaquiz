@@ -4,3 +4,4 @@ django-anymail
 django-import-export
 python-dotenv
 gunicorn
+whitenoise
