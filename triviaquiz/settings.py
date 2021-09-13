@@ -92,11 +92,11 @@ SITE_ID = 1
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': os.environ.get('QOVERY_DATABASE_MY_DB_DATABASE', 'postgres'),
-    'USER': os.environ.get('QOVERY_DATABASE_MY_DB_USERNAME', 'postgres'),
-    'PASSWORD': os.environ.get('QOVERY_DATABASE_MY_DB_PASSWORD', 'postgres'),
-    'HOST': os.environ.get('QOVERY_DATABASE_MY_DB_HOST', 'localhost'),
-    'PORT': os.environ.get('QOVERY_DATABASE_MY_DB_PORT', 5432),
+    'NAME': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_DEFAULT_DATABASE_NAME', 'postgres'),
+    'USER': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_LOGIN', 'postgres'),
+    'PASSWORD': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_PASSWORD', 'postgres'),
+    'HOST': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_HOST', 'localhost'),
+    'PORT': os.environ.get('QOVERY_POSTGRESQL_ZC5EA19FA_PORT', 5432),
   }
 }
 # Password validation
