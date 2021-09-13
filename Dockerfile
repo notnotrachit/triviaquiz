@@ -1,6 +1,7 @@
 FROM python:3
 WORKDIR /app
 COPY . .
+ARG PASS
 ENV PASS=$PASS
 RUN pip install -r requirements.txt
 RUN python manage.py makemigrations
