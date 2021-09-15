@@ -7,6 +7,7 @@ A simple trivia quizzz web app made using django
 ## Demo
 
 [http://triviaquizzz.herokuapp.com/](http://triviaquizzz.herokuapp.com/)
+https://triviaquiz.redcrypt.xyz
 
   
 ## Features
