@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-2bknrwhg3qg%td4re_h86d&3(8%9cf3c-%ka4!ox8l4o58wc!-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*',"triviaquiz.redcrypt.xyz"]
 
 AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
