@@ -26,11 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2bknrwhg3qg%td4re_h86d&3(8%9cf3c-%ka4!ox8l4o58wc!-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+"""
 if  os.getenv("DEBUG_D")=="True":
     DEBUG = True
 else:
     DEBUG = False
-
+"""
+DEBUG=True
 ALLOWED_HOSTS = ['*',"triviaquiz.redcrypt.xyz"]
 
 AUTHENTICATION_BACKENDS = [
